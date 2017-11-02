@@ -1,12 +1,23 @@
-var groceryList = [];
+var groceries = [];
+var items = [1,2,3,4];
 
 $(document).ready(function(){
   $("form#groceries").submit(function(event){
-    groceryList.push($("#item-1").val());
-    groceryList.push($("#item-2").val());
-    groceryList.push($("#item-3").val());
-    groceryList.push($("#item-4").val());
-    console.log(groceryList);
+    items.forEach(function(item){
+      groceries.push($("#item-"+item).val());
+    })
+
+    var sortedGroceries = groceries.sort();
+    var upperCaseGroceries = sortedGroceries.map(function(sortedGrocery){
+      return sortedGrocery.toUpperCase();
+    });
+
+    $("form#groceries").hide();
+
+    upperCaseGroceries.forEach(function(upperCaseGrocery){
+      $("#output").append("<li>"+upperCaseGrocery+"</li>")
+    });
+
 
     event.preventDefault();
   });
